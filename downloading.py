@@ -134,7 +134,7 @@ if not os.path.exists(webui_path):
         os.environ["CUDA_MODULE_LOADING"]="LAZY"
         os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
         os.environ["PYTHONWARNINGS"] = "ignore"
-        get_ipython().system('aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/vorstcavry/test/resolve/main/colabTimer.txt -d /root/sdw/FULL_REPO/static -o colabTimer.txt')
+        get_ipython().system('aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/vorstcavry/test/resolve/main/colabTimer.txt -d /root/sdw/static -o colabTimer.txt')
         get_ipython().system('echo -n {start_colab} > /root/sdw/static/colabTimer.txt')
     del cap
     install_time = timedelta(seconds=time.time()-start_install)
@@ -524,6 +524,13 @@ with capture.capture_output() as cap:
         get_ipython().system('aria2c --optimize-concurrent-downloads --console-log-level=error --summary-interval=10 -j5 -x16 -s16 -k1M -c -d {webui_path} {file}')
         get_ipython().system('rm -rf /root/sdw/extensions/openpose-editor-master')
         get_ipython().system('rm -rf /root/sdw/extensions/sd-webui-depth-lib-main')
+        get_ipython().system('rm -rf /root/sdw/extensions/HUB')
+        get_ipython().system('rm -rf /root/sdw/extensions/infinite-image-browsing')
+        get_ipython().system('rm -rf /root/sdw/extensions/sd-fast-pnginfo-master')
+        get_ipython().system('rm -rf /root/sdw/extensions/supermerger')
+        get_ipython().system('rm -rf /root/sdw/embeddings/NegativeEmbeds')
+        get_ipython().system('rm -rf /root/sdw/user.css')
+        
         print("Dah itu aja sih")
 del cap
 
