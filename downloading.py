@@ -531,7 +531,7 @@ with capture.capture_output() as cap:
         get_ipython().system('rm -rf /root/sdw/embeddings/NegativeEmbeds')
         get_ipython().system('rm -rf /root/sdw/user.css')
         
-        print("Dah itu aja sih")
+        print("\rDah itu aja sih")
 del cap
 
 ## Install of Custom extensions
