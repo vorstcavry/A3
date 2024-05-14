@@ -137,7 +137,7 @@ if not os.path.exists(webui_path):
         get_ipython().system('echo -n {start_colab} > /root/sdw/static/colabTimer.txt')
     del cap
     install_time = timedelta(seconds=time.time()-start_install)
-    print("\r🚀 Unpacking is complete! For","%02d:%02d:%02d ⚡\n" % (install_time.seconds / 3600, (install_time.seconds / 60) % 60, install_time.seconds % 60), end='', flush=True)
+    print("\r🚀 Ekstrak file selesai! For","%02d:%02d:%02d ⚡\n" % (install_time.seconds / 3600, (install_time.seconds / 60) % 60, install_time.seconds % 60), end='', flush=True)
 else:
     print("🚀 All unpacked... Skip. ⚡")
     start_colab = float(open(f'{webui_path}/static/colabTimer.txt', 'r').read())
@@ -167,7 +167,7 @@ if latest_webui or latest_exstensions:
             # %cd {webui_path}/extensions/Encrypt-Image
             # !git reset --hard 376358d8854472b9ea50e9fc8800367d1ca51137 # stable commit :3
     del cap
-    print(f"\r✨ {action} Completed!")
+    print(f"\r✨ {action} Selesai!")
 
 
 # === FIXING EXTENSIONS ===
@@ -526,7 +526,7 @@ if len(extension_repo) > 0:
 
 ## List Models and stuff
 if detailed_download == "off":
-    print("\n\n\033[33mIf you don't see any downloaded files, enable the 'Detailed Downloads' feature in the widget.")
+    print("\n\n\033[33mJika Kamu tidak melihat file yang diunduh, aktifkan fitur 'Unduhan Detail' di widget.")
 
 if any(not file.endswith('.txt') for file in os.listdir(models_dir)):
     print("\n\033[33m➤ Models\033[0m")
@@ -559,8 +559,16 @@ with capture.capture_output() as cap:
     for file in files_umi:
         get_ipython().system('aria2c --optimize-concurrent-downloads --console-log-level=error --summary-interval=10 -j5 -x16 -s16 -k1M -c -d {save_dir_path} {file}')
 del cap
+print("💢Menghapus dan mengoptimalkan proses...")
+
+files_config = [
+    "https://huggingface.co/spaces/vorstcavry/stable-diffusion-webui/resolve/main/config.json",
+    "https://huggingface.co/spaces/vorstcavry/stable-diffusion-webui/resolve/main/ui-config.json"
+]
 
 with capture.capture_output() as cap:
-    get_ipython().system('rm -rf /root/sdw/extensions/openpose-editor-master')
-    get_ipython().system('rm -rf /root/sdw/extensions/sd-webui-depth-lib-main')
+    for file in files_config:
+        get_ipython().system('aria2c --optimize-concurrent-downloads --console-log-level=error --summary-interval=10 -j5 -x16 -s16 -k1M -c -d {webui_path} {file}')
+        get_ipython().system('rm -rf /root/sdw/extensions/openpose-editor-master')
+        get_ipython().system('rm -rf /root/sdw/extensions/sd-webui-depth-lib-main')
 del cap
