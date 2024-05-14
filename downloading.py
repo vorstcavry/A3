@@ -47,7 +47,7 @@ if not os.path.exists(flag_file):
     additional_libs = {
         "Google Colab": {
             "xformers": "pip install xformers==0.0.25 --no-deps",
-            "gradio": "pip install gradio_client==0.2.7
+            "gradio": "pip install gradio_client==0.2.7"
         },
         "Kaggle": {
             "xformers": "pip install -q xformers==0.0.23.post1 triton==2.1.0",
