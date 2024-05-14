@@ -68,14 +68,7 @@ if not os.path.exists(flag_file):
         get_ipython().system('curl -s -OL https://github.com/DEX-1101/sd-webui-notebook/raw/main/res/new_tunnel --output-dir {root_path}')
         get_ipython().system('curl -s -Lo /usr/bin/cl https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 && chmod +x /usr/bin/cl')
         get_ipython().system('curl -sLO https://github.com/openziti/zrok/releases/download/v0.4.23/zrok_0.4.23_linux_amd64.tar.gz && tar -xzf zrok_0.4.23_linux_amd64.tar.gz -C /usr/bin && rm -f zrok_0.4.23_linux_amd64.tar.gz')
-        get_ipython().system('git clone https://github.com/xinntao/BasicSR.git')
-        get_ipython().run_line_magic('cd', 'BasicSR')
-        get_ipython().system('pip install -r requirements.txt')
-        get_ipython().system('python setup.py develop')
-        get_ipython().system('wget -P experiments/pretrained_models https://github.com/xinntao/BasicSR/releases/download/v0.1.0/EDVR_M_woTSA_x4_SR_REDS_official-9f5f5039.pth')
-        get_ipython().system('python basicsr/test.py -opt options/test/SRResNet/test_SRResNet.yml')
 
-    
     del cap
 
     clear_output()
