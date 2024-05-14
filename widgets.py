@@ -503,7 +503,7 @@ zrok_token_widget = widgets.Text(description='Zrok Token:', style=style, layout=
 zrok_button = widgets.HTML('<a href="https://colab.research.google.com/drive/1d2sjWDJi_GYBUavrHSuQyHTDuLy36WpU" target="_blank">Reg Zrok Token</a>').add_class("button_ngrok")
 zrok_widget = widgets.HBox([zrok_token_widget, zrok_button], style=style, layout=layout)
 # ---
-commandline_arguments_options = "--listen --enable-insecure-extension-access --theme dark --no-half-vae --disable-console-progressbars --xformers"
+commandline_arguments_options = "--listen --enable-insecure-extension-access --theme dark --no-half-vae --disable-console-progressbars --no-hashing --opt-sdp-attention"
 commandline_arguments_widget = widgets.Text(description='Arguments:', value=commandline_arguments_options, style=style, layout=layout)
 
 ''' Display Additional'''
