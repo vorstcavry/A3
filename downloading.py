@@ -46,7 +46,8 @@ if not os.path.exists(flag_file):
     # Dictionary of additional libraries specific to certain environments
     additional_libs = {
         "Google Colab": {
-            "xformers": "pip install xformers==0.0.25 --no-deps"
+            "xformers": "pip install xformers==0.0.25 --no-deps",
+            "gradio": "pip install gradio_client==0.2.7
         },
         "Kaggle": {
             "xformers": "pip install -q xformers==0.0.23.post1 triton==2.1.0",
