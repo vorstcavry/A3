@@ -512,6 +512,20 @@ print("\r🏁 Download Complete!" + " "*15)
 # Cleaning shit after downloading...
 get_ipython().system('find {webui_path} \\( -type d \\( -name ".ipynb_checkpoints" -o -name ".aria2" \\) -o -type f -name "*.aria2" \\) -exec rm -r {{}} \\; >/dev/null 2>&1')
 
+print("\r💢Menghapus dan mengoptimalkan proses...")
+
+files_config = [
+    "https://huggingface.co/spaces/vorstcavry/stable-diffusion-webui/resolve/main/config.json",
+    "https://huggingface.co/spaces/vorstcavry/stable-diffusion-webui/resolve/main/ui-config.json"
+]
+
+with capture.capture_output() as cap:
+    for file in files_config:
+        get_ipython().system('aria2c --optimize-concurrent-downloads --console-log-level=error --summary-interval=10 -j5 -x16 -s16 -k1M -c -d {webui_path} {file}')
+        get_ipython().system('rm -rf /root/sdw/extensions/openpose-editor-master')
+        get_ipython().system('rm -rf /root/sdw/extensions/sd-webui-depth-lib-main')
+        print("Dah itu aja sih")
+del cap
 
 ## Install of Custom extensions
 if len(extension_repo) > 0:
@@ -559,17 +573,4 @@ save_dir_path = f"{webui_path}/extensions/Umi-AI-Wildcards/wildcards/discord"
 with capture.capture_output() as cap:
     for file in files_umi:
         get_ipython().system('aria2c --optimize-concurrent-downloads --console-log-level=error --summary-interval=10 -j5 -x16 -s16 -k1M -c -d {save_dir_path} {file}')
-del cap
-print("💢Menghapus dan mengoptimalkan proses...")
-
-files_config = [
-    "https://huggingface.co/spaces/vorstcavry/stable-diffusion-webui/resolve/main/config.json",
-    "https://huggingface.co/spaces/vorstcavry/stable-diffusion-webui/resolve/main/ui-config.json"
-]
-
-with capture.capture_output() as cap:
-    for file in files_config:
-        get_ipython().system('aria2c --optimize-concurrent-downloads --console-log-level=error --summary-interval=10 -j5 -x16 -s16 -k1M -c -d {webui_path} {file}')
-        get_ipython().system('rm -rf /root/sdw/extensions/openpose-editor-master')
-        get_ipython().system('rm -rf /root/sdw/extensions/sd-webui-depth-lib-main')
 del cap
