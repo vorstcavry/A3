@@ -7,6 +7,28 @@ Original file is located at
     https://colab.research.google.com/drive/1Y6IofzwyAJq64pL9FXFK_3nARPIN6l7C
 """
 
+import os
+import re
+import time
+import json
+import requests
+from datetime import timedelta
+
+
+#  ================= DETECT ENV =================
+def detect_environment():
+    free_plan = (os.sysconf('SC_PAGE_SIZE') * os.sysconf('SC_PHYS_PAGES') / (1024. ** 3) <= 20)
+    environments = {
+        'COLAB_GPU': ('Google Colab', "/root" if free_plan else "/content"),
+        'KAGGLE_URL_BASE': ('Kaggle', "/kaggle/working/content")
+    }
+
+    for env_var, (environment, path) in environments.items():
+        if env_var in os.environ:
+            return environment, path, free_plan
+
+env, root_path, free_plan = detect_environment()
+webui_path = f"{root_path}/vorstcavry"
 flag_file = f"{root_path}/libraries_installed.txt"
 
 if not os.path.exists(flag_file):
