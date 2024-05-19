@@ -43,7 +43,7 @@ def detect_environment():
             return environment, path, free_plan
 
 env, root_path, free_plan = detect_environment()
-webui_path = f"{root_path}/vorstcavry"
+webui_path = f"{root_path}/vorst-cavry"
 flag_file = f"{root_path}/libraries_installed.txt"
 
 if not os.path.exists(flag_file):
