@@ -9,7 +9,36 @@ Original file is located at
 
 # Commented out IPython magic to ensure Python compatibility.
 
+import os
+import re
+import time
+import json
+import requests
+from datetime import timedelta
 
-%cd /root/vorst-cavry
+commandline_arguments = "--listen --enable-insecure-extension-access --theme dark --no-half-vae --disable-console-progressbars --disable-safe-unpickle --no-hashing --opt-sdp-attention --cloudflared --skip-version-checkloudflared" #@param{type:"string"}
 
-!python launch.py --listen --enable-insecure-extension-access --theme dark --no-half-vae --disable-console-progressbars --disable-safe-unpickle --no-hashing --opt-sdp-attention --cloudflared --skip-version-checkloudflared
+#  ================= DETECT ENV =================
+def detect_environment():
+    free_plan = (os.sysconf('SC_PAGE_SIZE') * os.sysconf('SC_PHYS_PAGES') / (1024. ** 3) <= 20)
+    environments = {
+        'COLAB_GPU': ('Google Colab', "/root" if free_plan else "/content"),
+        'KAGGLE_URL_BASE': ('Kaggle', "/kaggle/working/content")
+    }
+
+    for env_var, (environment, path) in environments.items():
+        if env_var in os.environ:
+            return environment, path, free_plan
+
+env, root_path, free_plan = detect_environment()
+webui_path = f"{root_path}/vorst-cavry"
+#  ----------------------------------------------
+
+# automatic fixing path V2
+get_ipython().system('sed -i \'s|"tagger_hf_cache_dir": ".*"|"tagger_hf_cache_dir": "{webui_path}/models/interrogators/"|\' {webui_path}/config.json')
+get_ipython().system('sed -i \'s|"additional_networks_extra_lora_path": ".*"|"additional_networks_extra_lora_path": "{webui_path}/models/Lora/"|\' {webui_path}/config.json')
+get_ipython().system('sed -i \'s|"ad_extra_models_dir": ".*"|"ad_extra_models_dir": "{webui_path}/models/adetailer/"|\' {webui_path}/config.json')
+# ---
+get_ipython().system('sed -i \'s/"sd_checkpoint_hash": ".*"/"sd_checkpoint_hash": ""/g; s/"sd_model_checkpoint": ".*"/"sd_model_checkpoint": ""/g; s/"sd_vae": ".*"/"sd_vae": "None"/g\' {webui_path}/config.json')
+
+get_ipython().system('COMMANDLINE_ARGS="{commandline_arguments}" python launch.py')
