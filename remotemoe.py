@@ -9,6 +9,6 @@ Original file is located at
 
 # Commented out IPython magic to ensure Python compatibility.
 
-# %cd /root/vorst-cavry
+%cd /root/vorst-cavry
 
 !python launch.py --listen --enable-insecure-extension-access --theme dark --no-half-vae --disable-console-progressbars --disable-safe-unpickle --no-hashing --opt-sdp-attention --remotemoe --skip-version-checkloudflared
