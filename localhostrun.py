@@ -16,7 +16,7 @@ import json
 import requests
 from datetime import timedelta
 
-commandline_arguments = "--listen --enable-insecure-extension-access --theme dark --no-half-vae --disable-console-progressbars --disable-safe-unpickle --no-hashing --opt-sdp-attention --localhostrun" #@param{type:"string"}
+commandline_arguments = "--listen --enable-insecure-extension-access --theme dark --no-half-vae --share --disable-console-progressbars --disable-safe-unpickle --no-hashing --opt-sdp-attention --localhostrun" #@param{type:"string"}
 #  ================= DETECT ENV =================
 def detect_environment():
     free_plan = (os.sysconf('SC_PAGE_SIZE') * os.sysconf('SC_PHYS_PAGES') / (1024. ** 3) <= 20)
