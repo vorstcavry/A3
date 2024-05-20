@@ -16,7 +16,7 @@ import json
 import requests
 from datetime import timedelta
 
-commandline_arguments = "--listen --enable-insecure-extension-access --share --theme dark --no-half-vae --disable-console-progressbars --disable-safe-unpickle --no-hashing --opt-sdp-attention --multiple" #@param{type:"string"}
+commandline_arguments = "--listen --enable-insecure-extension-access --theme dark --no-half-vae --disable-console-progressbars --share --disable-safe-unpickle --no-hashing --opt-sdp-attention --multiple" #@param{type:"string"}
 
 #  ================= DETECT ENV =================
 def detect_environment():
