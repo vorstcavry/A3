@@ -50,11 +50,6 @@ tunnel = tunnel_class(tunnel_port)
 tunnel.add_tunnel(command="cl tunnel --url localhost:{port}", name="cl", pattern=re.compile(r"[\w-]+\.trycloudflare\.com"))
 tunnel.add_tunnel(command="lt --port {port}", name="lt", pattern=re.compile(r"[\w-]+\.loca\.lt"), note="Password : " + "\033[32m" + public_ipv4 + "\033[0m" + " rerun cell if 404 error.")
 
-''' add zrok tunnel '''
-if zrok_token:
-    get_ipython().system('zrok enable {zrok_token} &> /dev/null')
-    tunnel.add_tunnel(command="zrok share public http://localhost:{port}/ --headless", name="zrok", pattern=re.compile(r"[\w-]+\.share\.zrok\.io"))
-
 # ======================== TUNNEL ========================
 
 
